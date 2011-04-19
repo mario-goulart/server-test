@@ -1,0 +1,8 @@
+;;; server-test.setup -*- scheme -*-
+
+(compile -s -O3 -d1 -j server-test server-test.scm)
+(compile -s -O3 -d1 server-test.import.scm)
+
+(install-extension 'server-test
+                   '("server-test.so" "server-test.import.so")
+                   '((version 0.1)))
