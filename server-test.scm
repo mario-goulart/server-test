@@ -1,5 +1,5 @@
 (module server-test
-(test-server-port start-test-server stop-test-server connect-procedure)
+(test-server-port start-test-server stop-test-server connect-procedure with-test-server)
 
 ;; Code heavily based on the sendfile egg test infrastructure
 
@@ -50,5 +50,13 @@
   (process-signal pid)
   (newline)
   (notify "sent SIGTERM to server. Please make sure the server isn't running anymore!"))
+
+(define (with-test-server server-thunk tests-thunk)
+  (let ((pid (start-test-server server-thunk)))
+    (handle-exceptions exn
+      (stop-test-server pid)
+      (begin
+        (tests-thunk)
+        (stop-test-server pid)))))
 
 ) ; end module
