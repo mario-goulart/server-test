@@ -19,7 +19,7 @@
   (handle-exceptions exn
     #f
     (receive (in out)
-        ((connect-procedure) "localhost" 8080)
+        ((connect-procedure) "localhost" (test-server-port))
       (close-input-port in)
       (close-output-port out)
       #t)))
