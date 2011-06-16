@@ -1,1 +1,6 @@
-((egg "serve-test.egg"))
+;;; server-test.meta -*- scheme -*-
+((egg "server-test.egg")
+ (synopsis "Utilities to help testing servers")
+ (author "<a href=\"http://wiki.call-cc.org/users/mario-domenech-goulart\">Mario Domenech Goulart</a>")
+ (license "BSD")
+ (category testing))
