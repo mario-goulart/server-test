@@ -1,14 +1,40 @@
 (module server-test
-(test-server-port start-test-server stop-test-server connect-procedure with-test-server)
+  (;; Parameters
+   test-server-port
+   connect-procedure
+   standby-time
+   max-attempts-to-connect
+   time-between-attempts-to-connect
+
+   ;; Procedures
+   start-test-server
+   stop-test-server
+   with-test-server
+
+   )
 
 ;; Code heavily based on the sendfile egg test infrastructure
 
 (import chicken scheme posix data-structures utils ports files extras)
 (use tcp)
 
+;;; Parameters
 (define test-server-port (make-parameter 8080))
+
 (define connect-procedure (make-parameter tcp-connect))
 
+ ;; Time to wait for the server to start serving after it has started
+ ;; accepting connections
+(define standby-time (make-parameter 2))
+
+;; Maximum number of attempts to connect to the server
+(define max-attempts-to-connect (make-parameter 3))
+
+(define time-between-attempts-to-connect (make-parameter 1))
+
+
+
+;;; Procedures
 (define (notify fmt . args)
   (apply printf fmt args)
   (flush-output))
@@ -36,13 +62,13 @@
   (newline)
   (notify "Starting test-server on port ~a" (test-server-port))
   (let ((pid (process-fork thunk)))
-    (unless (wait-for-server 3)
+    (unless (wait-for-server (max-attempts-to-connect))
       (notify "Could not start test server!")
       (exit 0))
     (newline)
     (notify "Standby...")
     (flush-output)
-    (sleep 4)
+    (sleep (standby-time))
     pid))
 
 (define (stop-test-server pid)
