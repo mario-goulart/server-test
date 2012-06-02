@@ -54,7 +54,7 @@
   (if (zero? times)
       #f
       (begin
-        (sleep 1)
+        (sleep (time-between-attempts-to-connect))
         (or (can-connect?)
             (wait-for-server (sub1 times))))))
 
