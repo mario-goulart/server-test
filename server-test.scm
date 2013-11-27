@@ -80,7 +80,9 @@
 (define (with-test-server server-thunk tests-thunk)
   (let ((pid (start-test-server server-thunk)))
     (handle-exceptions exn
-      (stop-test-server pid)
+      (begin
+        (stop-test-server pid)
+        (abort exn))
       (begin
         (tests-thunk)
         (stop-test-server pid)))))
