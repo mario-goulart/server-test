@@ -15,8 +15,21 @@
 
 ;; Code heavily based on the sendfile egg test infrastructure
 
-(import chicken scheme posix data-structures utils ports files extras)
-(use tcp)
+(import scheme)
+(cond-expand
+  (chicken-4
+   (import chicken posix data-structures utils ports files extras)
+   (use tcp))
+  (chicken-5
+   (import (chicken base)
+           (chicken condition)
+           (chicken file)
+           (chicken format)
+           (chicken port)
+           (chicken process)
+           (chicken process-context)
+           (chicken tcp)))
+  (else (error "Unsupported CHICKEN version.")))
 
 ;;; Parameters
 (define test-server-port (make-parameter 8080))

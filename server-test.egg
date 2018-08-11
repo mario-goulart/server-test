@@ -1,0 +1,9 @@
+;;; server-test.egg -*- Scheme -*-
+
+((synopsis "Utilities to help testing servers")
+ (category testing)
+ (license "BSD")
+ (author "Mario Domenech Goulart")
+ (component-options
+  (csc-options "-O3" "-d1"))
+ (components (extension server-test)))
