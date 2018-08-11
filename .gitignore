@@ -1,0 +1,7 @@
+server-test.build.sh
+server-test.import.scm
+server-test.import.so
+server-test.install.sh
+server-test.link
+server-test.so
+server-test.static.o
