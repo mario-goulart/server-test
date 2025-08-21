@@ -20,7 +20,11 @@
   (chicken-4
    (import chicken posix data-structures utils ports files extras)
    (use tcp))
-  (chicken-5
+  ((or chicken-5 chicken-6)
+   (cond-expand
+    (chicken-6
+     (import (scheme base)))
+    (else))
    (import (chicken base)
            (chicken condition)
            (chicken file)
