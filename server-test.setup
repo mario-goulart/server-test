@@ -5,4 +5,4 @@
 
 (install-extension 'server-test
                    '("server-test.so" "server-test.import.so")
-                   '((version "0.6")))
+                   '((version "0.7")))
