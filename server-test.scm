@@ -33,6 +33,16 @@
            (chicken process)
            (chicken process-context)
            (chicken tcp)))
+  (chicken-6
+   (import (scheme base)
+           (chicken base)
+           (chicken condition)
+           (chicken file)
+           (chicken format)
+           (chicken port)
+           (chicken process)
+           (chicken process-context)
+           (chicken tcp)))
   (else (error "Unsupported CHICKEN version.")))
 
 ;;; Parameters
